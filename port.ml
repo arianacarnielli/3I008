@@ -54,7 +54,8 @@ let input_state in_c =
         let line = input_line in_c in
         let boat = boat_of_string line in
         res:= add_boat boat !res
-      done; !res
+      done;
+      !res
     with
     | End_of_file -> !res
 
