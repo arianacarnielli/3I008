@@ -23,6 +23,7 @@ let all_reachable_states s list_m =
 
 (* calcul d’une solution a partir d’un etat *)
 let solve_state s =
+  let () = Port.output_state s stdout in
   let visite = Hashtbl.create 100 in
   let file = Queue.create () in
   let () = Queue.add (s, "") file in
@@ -49,8 +50,5 @@ let solve_state s =
   in start ()
 
 let solve_input in_ch =
+  seek_in in_ch 0;
   solve_state (Port.input_state in_ch)
-
-
-
-    (**)

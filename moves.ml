@@ -35,8 +35,8 @@ let check_solution s str =
   let list_move = list_move_of_string str in
   try
     let rec loop s_new l =
-      Port.output_state s_new stdout;
-      print_newline ();
+      (*Port.output_state s_new stdout;
+        print_newline ();*)
       match l with
       |[] -> win s_new
       |hd::tl -> loop (apply_move hd s_new) tl

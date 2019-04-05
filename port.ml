@@ -84,6 +84,7 @@ let grid_of_state s =
   Array.map (Array.map char_of_cell) s.monde
 
 let input_state in_ch =
+  seek_in in_ch 0;
   let res = ref (port_vide ()) in
     try
       while true do

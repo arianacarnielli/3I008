@@ -46,4 +46,4 @@ close_in file;;
 
 output_state port stdout;;
 
-let str = Port.string_of_state port 
+let str = Port.string_of_state port;;

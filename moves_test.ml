@@ -18,10 +18,10 @@ let port = add_boat e port;;
 let port = add_boat f port;;
 let port = add_boat g port;;
 
-let move_test = {nom = 'A'; move = 1}
+let move_test = {nom = 'A'; move = 1};;
 
-let () = print_endline (string_of_move move_test)
+let () = print_endline (string_of_move move_test);;
 
-let res = "D<B>B>B>A<C<C<F<C<F<A>B<D<B<B<F<E>E>E>A>A>A>"
+let res = "D<B>B>B>A<C<C<F<C<F<A>B<D<B<B<F<E>E>E>A>A>A>";;
 
-let () = Printf.printf "%B" (check_solution port res)
+let () = Printf.printf "%B" (check_solution port res);;

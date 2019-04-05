@@ -19,15 +19,15 @@ let port = add_boat e port;;
 let port = add_boat f port;;
 let port = add_boat g port;;
 
-let moves = Solver.all_possible_moves port
+let moves = Solver.all_possible_moves port;;
 
-let states = Solver.all_reachable_states port moves
-let () = List.iter (fun s -> output_state s stdout; print_newline ()) states
+let states = Solver.all_reachable_states port moves;;
+let () = List.iter (fun s -> output_state s stdout; print_newline ()) states;;
 
 let file = open_in "portFile2.txt";;
 let port2 = input_state file;;
 close_in file;;
 
-let moves = Solver.all_possible_moves port2
-let res = Solver.solve_state port2
-let () = Port.output_state port2 stdout
+let moves = Solver.all_possible_moves port2;;
+let res = Solver.solve_state port2;;
+let () = Port.output_state port2 stdout;;
