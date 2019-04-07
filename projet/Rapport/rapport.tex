@@ -1,0 +1,323 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PACOTES                                                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+
+%-----------------------------------------------------------------------------------%
+% LAYOUT DA PÁGINA                                                                  %
+%-----------------------------------------------------------------------------------%
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+%\usepackage{fancyhdr} % Permite controlar como são exibidos os cabeçalhos
+
+%-----------------------------------------------------------------------------------%
+% FORMATAÇÃO DO TEXTO                                                               %
+%-----------------------------------------------------------------------------------%
+%\usepackage{setspace} % Permite definir o espaçamento entre linhas
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE IMAGENS                                                                %
+%-----------------------------------------------------------------------------------%
+\usepackage[pdftex]{graphicx}
+\pdfsuppresswarningpagegroup=1 % A warning issued when several PDF images are
+% imported in the same page. Mostly harmless, can be almost always supressed.
+%\usepackage[pstarrows]{pict2e} % Amplia as funcionalidades do ambiente picture
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, arrows.meta}
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE TABELAS                                                                %
+%-----------------------------------------------------------------------------------%
+\usepackage{array} % Facilita a formatação de tabelas
+%\usepackage{multirow} % Permite criar células que ocupam várias linhas em uma tabela
+\usepackage{longtable} % Permite criar tabelas que quebram de página
+
+%-----------------------------------------------------------------------------------%
+% PACOTES MATEMÁTICOS DE BASE                                                       %
+%-----------------------------------------------------------------------------------%
+\usepackage{amsfonts,amstext,amscd,bezier,amsthm,amssymb}
+\usepackage[centertags]{amsmath}
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE SÍMBOLOS MATEMÁTICOS                                                   %
+%-----------------------------------------------------------------------------------%
+\usepackage{mathtools} % Símbolos matemáticos extras. (ex.: \xrightharpoon)
+%\usepackage[integrals]{wasysym} % Muda o estilo das integrais, além de outros
+%                                 símbolos extras
+%\usepackage[nice]{nicefrac} % Permite o uso de frações "melhores". Usar \nicefrac{}{}
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE FONTES MATEMÁTICAS                                                     %
+%-----------------------------------------------------------------------------------%
+%\usepackage{mathbbol} % Quase todos os símbolos com \mathbb
+%\usepackage{bbm} % Extensão dos símbolos de \mathbb. Usar comando \mathbbm
+%\usepackage{calrsfs} % Muda o estilo de \mathcal
+%\usepackage[mathcal]{euscript} % Muda o estilo de \mathcal
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE CODIFICAÇÃO DE FONTES                                                  %
+%-----------------------------------------------------------------------------------%
+\usepackage[utf8]{inputenc} % Permite o uso de caracteres ISO 8859-1, incluindo os
+%                               caracteres acentuados diretamente.
+\usepackage[T1]{fontenc} % Uso de fontes T1, necessário para tratar caracteres
+%                          acentuados como um único bloco.
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE LÍNGUAS                                                                %
+%-----------------------------------------------------------------------------------%
+\usepackage[french]{babel} % Seleciona a língua do documento, definindo nomes de
+%                              seções, nome do índice, da bibliografia, etc. Em caso
+%                              de documento com mais de uma língua, a padrão é a
+%                              última.
+\NoAutoSpaceBeforeFDP % Utilizar em francês se quiser evitar espaços antes de :
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE BIBLIOGRAFIA                                                           %
+%-----------------------------------------------------------------------------------%
+%\usepackage{babelbib} % Permite definir a língua das entradas da bibliografia. Usar
+%                       [fixlanguage] para uma mesma língua para todas as entradas e
+%                       \selectbiblanguage{} para definir a língua. Um estilo compa-
+%                       tível com babelbib deve ser usado (ex: babplain)
+\usepackage{cite} % Organiza os elementos citados dentro de um mesmo \cite.
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DE FONTES                                                                 %
+%-----------------------------------------------------------------------------------%
+% Computer Modern (fonte padrão)                                                    %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage{ae} % A usar com a fonte padrão do LaTeX quando forem gerados PDFs, para
+%                 corrigir erros de visualização
+
+% Computer Modern Bright (sans serif)                                               %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage{cmbright}
+
+% Times New Roman                                                                   %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage{mathptmx} % Muda texto e modo matemático
+%\usepackage{times} % Apenas texto, não muda modo matemático
+
+% Arial                                                                             %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage[scaled]{uarial} % Arial como fonte sans serif padrão
+
+% Palatino                                                                          %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage{mathpazo} % Muda texto e modo matemático
+%\usepackage{palatino} % Apenas texto, não muda modo matemático
+
+% Concrete                                                                          %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage{ccfonts} % Texto: Concrete; Matemático: Concrete Math
+%\usepackage{ccfonts, eulervm} % Texto: Concrete; Matemático: Euler
+
+% Iwona                                                                             %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage[math]{iwona} % Texto e modo matemático: Iwona
+
+% Kurier                                                                            %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage[math]{kurier} % Texto e modo matemático: Kurier
+
+% Antykwa Póltawskiego                                                              %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%\usepackage{antpolt} % Texto: Antykwa Póltawskiego; Matemático: nenhum
+                     % Usar fontenc = QX ou OT4
+
+% Utopia                                                                            %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %                     
+%\usepackage{fourier} % Texto: Utopia; Matemático: Fourier
+
+% KP Serif                                                                          %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+\usepackage{kpfonts}
+
+%-----------------------------------------------------------------------------------%
+% CORES                                                                             %
+%-----------------------------------------------------------------------------------%
+\usepackage{color}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkmagenta}{rgb}{0.5,0,0.5}
+\definecolor{darkgray}{rgb}{0.5,0.5,0.5}
+\definecolor{darkblue}{rgb}{0.2,0.2,0.4}
+\definecolor{darkred}{rgb}{0.6,0.15,0.15}
+\definecolor{gray}{rgb}{0.65,0.65,0.65}
+\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
+\definecolor{lightblue}{rgb}{0.5,0.5,1}
+\definecolor{lightgreen}{rgb}{0.5,1,0.5}
+\definecolor{deadred}{rgb}{0.7, 0.2, 0.2}
+\definecolor{deadblue}{rgb}{0.2, 0.2, 0.7}
+
+%-----------------------------------------------------------------------------------%
+% PACOTES DIVERSOS                                                                  %
+%-----------------------------------------------------------------------------------%
+\usepackage{icomma} % Permite uso de vírgula como separador decimal
+\usepackage{url} % Pacote para não ter problemas com URLs. Usar \url{}
+%\usepackage{randtext} % Troca a ordem de letras de uma frase (útil com e-mails em
+                      % PDFs a serem publicados on-line.
+\usepackage[hidelinks]{hyperref}
+%\usepackage{showkeys} % Para mostrar o nome dos labels
+\usepackage{enumitem} % Facilita o uso de listas, inclusive referências a itens de
+                      % listas.
+%\usepackage[absolute]{textpos} % Posição absoluta de texto na página
+%\usepackage{pdfpages} % Permite incluir documentos em PDF no arquivo
+%\usepackage{refcheck} % Verifica as referências procurando por
+%                      % labels não usados ou equações numeradas sem labels.
+%                      % Verificar o arquivo .log e procurar por RefCheck.
+\usepackage[french, onelanguage]{algorithm2e}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONFIGURAÇÕES                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-----------------------------------------------------------------------------------%
+% FORMATAÇÃO DO TEXTO                                                               %
+%-----------------------------------------------------------------------------------%
+%\onehalfspacing % Espaçamento 1 1/2 (definido no pacote setspace)
+
+%-----------------------------------------------------------------------------------%
+% DEFINIÇÃO DE AMBIENTES MATEMÁTICOS                                                %
+%-----------------------------------------------------------------------------------%
+%\theoremstyle{plain}
+%\newtheorem{theo}{Teorema}[section]
+%\newtheorem{lemm}[theo]{Lema}
+%\newtheorem{coro}[theo]{Corolário}
+%\newtheorem{prop}[theo]{Proposição}
+%\theoremstyle{definition}
+%\newtheorem{defi}[theo]{Definição}
+%\newtheorem{remq}[theo]{Observação}
+%%\newtheorem{expl}[theo]{Exemplo}
+%\newenvironment{expl}%
+%  {\refstepcounter{theo}%
+%    \begin{list}{}{%
+%    \setlength{\topsep}{0pt}%
+%    \setlength{\leftmargin}{\parindent}%
+%    \setlength{\rightmargin}{0pt}%
+%    \setlength{\listparindent}{\parindent}%
+%    \setlength{\itemindent}{0pt}%
+%    \setlength{\parsep}{\parskip}}%
+%    \item[]{\bf Exemplo \thetheo. }}%
+%  {\hspace*{\fill} $\square$ \end{list} \medskip}
+%\newenvironment{solu}%
+%  {\noindent {\bf Solução. }\small}%
+%  {\hspace*{\fill} $\square$ \normalsize \medskip}
+%\newenvironment{dems}[1][Demonstração]%
+%  {\begin{list}{}{%
+%    \setlength{\topsep}{0pt}%
+%    \setlength{\leftmargin}{\parindent}%
+%    \setlength{\rightmargin}{0pt}%
+%    \setlength{\listparindent}{\parindent}%
+%    \setlength{\itemindent}{0pt}%
+%    \setlength{\parsep}{\parskip}}%
+%    \item[]{\bf #1. }}%
+%  {\hspace*{\fill} $\blacksquare$ \end{list} \medskip}
+
+
+%-----------------------------------------------------------------------------------%
+% DEFINIÇÃO DE COMANDOS MATEMÁTICOS                                                 %
+%-----------------------------------------------------------------------------------%
+%\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+%\newcommand{\norm}[1]{\left\lVert #1\right\lVert} % Norma
+%\newcommand{\abs}[1]{\left\lvert #1\right \rvert} % Valor absoluto
+%\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor} % Arredondar para baixo
+%\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil} % Arredondar para cima
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclareMathOperator*{\argmax}{argmax}
+
+%-----------------------------------------------------------------------------------%
+% NUMERAÇÃO DE ELEMENTOS                                                            %
+%-----------------------------------------------------------------------------------%
+%\numberwithin{table}{section}
+%\numberwithin{table}{subsection}
+%\numberwithin{figure}{section}
+%\numberwithin{figure}{subsection}
+%\numberwithin{equation}{section}
+%\numberwithin{equation}{subsection}
+%\numberwithin{theo}{chapter}
+%\numberwithin{theo}{subsection}
+
+% Maximal percentage of the page occupied by floats
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}
+% Maximal number of floats per page
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ESTRUTURA DO DOCUMENTO                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{plain}
+
+\title{3I008 --- Projet \\ ORush}
+\author{Ariana Carnielli}
+\date{}
+
+\maketitle
+
+\sloppy
+
+\tableofcontents
+
+\section{Introduction}
+
+Ce projet s'intéresse à l'implémentation du jeu de casse-tête de déplacement \emph{ORush}, une version du jeu \emph{Rush Hour} avec des bateaux. Comme dans le jeu original, les pièces sont disposées sur une grille $6 \times 6$, orientées à l'horizontale ou à la verticale, et ne peuvent bouger que selon leur orientation. L'objectif du jeu est de ramener un bateau spécifique, nommé dans notre implémentation de \texttt{A}, à la sortie. Ce bateau est toujours de taille 2, orienté à l'horizontale et à la ligne $y = 2$, la sortie étant à l'extrémité droite de cette ligne. On repère un bateau par la coordonnée de son point le plus en haut à gauche.
+
+Cette première partie du projet s'intéresse à représenter ce problème en OCaml en utilisant les principes de la programmation fonctionnelle, implémenter des fonctions permettant sa manipulation et, à la fin, implémenter un solveur permettant de résoudre une grille donnée. Le solveur est naïf et se base sur un parcours en largeur du graphe dont les sommets sont les états possibles du jeu, deux états étant reliés par une arête si et seulement si on peut passer d'un à l'autre par un mouvement élémentaire (un mouvement d'un seul bateau d'une seule case).
+
+L'implémentation se décompose en trois parties. Dans un premier temps, on écrit, dans un fichier \verb@port.ml@, la représentation d'un bateau et d'un état et des fonctions élémentaires permettant de le manipuler et l'afficher. On a ensuite écrit, dans le fichier \verb@moves.ml@, la représentation des mouvements des bateaux et des fonctions permettant de les appliquer lorsque possible. Finalement, le fichier \verb@solver.ml@ implémente le solveur. Un fichier complémentaire \verb@orush.ml@ donne un point d'entrée du programme, permettant de lire un fichier externe contenant un problème, le résoudre et afficher la grille aux états initial et final ainsi que la séquence de mouvements correspondant à la solution. Un fichier \verb@Makefile@ permet une compilation facile de l'ensemble du code.
+
+\section{Port}
+
+Le fichier \verb@port.ml@ contient les six fonctions et les deux types demandées pour que le module \verb@Port@ soit compatible avec la signature donnée dans l'énoncé. D'autres fonctions ont été codées afin de faciliter l'implémentation des fonctions de ce module et des suivants.
+
+La représentation d'un bateau est faite à l'aide d'un enregistrement à cinq champs : deux champs de type caractère représentant le nom et l'orientation (\verb@H@ ou \verb@V@ pour horizontale ou verticale) du bateau et trois champs de type entier contenant la taille du bateau et les coordonnées de son point de référence. Cela permet facilement de convertir ce type en une chaine de caractères conforme à l'énoncé et vice-versa à l'aide des fonctions \verb@boat_of_string@ et \verb@string_of_boat@.
+
+La représentation d'un état du port est faite par un type \verb@state@ défini comme étant équivalent à \verb@boat list@. Une implémentation alternative utilisant une autre représentation pour le \verb@state@ est décrite dans l'Appendice \ref{Append}.
+
+Pour la fonction \verb@add_boat@, la première étape implémentée à été de vérifier que le bateau \verb@b@ à rajouter se trouve bien dans la grille, ce qui est fait à l'aide d'une fonction auxiliaire nommée \verb@boat_in_grid@. Ensuite, on parcourt la liste des bateaux déjà présents dans la grille et, pour chacun de ces bateaux, on vérifie s'il intersecte \verb@b@. Pour cela, une fonction auxiliaire \verb@list_case_of_boat@ a été implémentée, permettant d'obtenir la liste des cases occupées par un bateau. Si l'ajout n'est pas possible, on lève une exception \verb@Invalid_argument@.
+
+La fonction \verb@grid_of_state@ commence en construisant une grille vide, représentée par des cases contenant le caractère \verb@~@. Ensuite, pour chaque bateau, on construit, à l'aide de la fonction \verb@list_case_of_boat@, la liste des cases qu'il occupe, qui est ensuite parcourue en remplissant les cases correspondantes de la grille par la lettre représentant le bateau.
+
+La première étape de la fonction \verb@input_state@ est de revenir au début du fichier lu. Ensuite, le fichier est parcouru ligne à ligne à l'aide d'une fonction récursive qui se termine lorsque l'exception \verb@End_of_file@ est levée. Pour chaque ligne, la fonction \verb@boat_of_string@ est utilisée pour convertir la ligne lue en \verb@boat@.
+
+Finalement, la fonction \verb@output_state@ imprime sur un canal de sortie une représentation de l'état en convertissant d'abord l'état en une grille de caractères à l'aide de la fonction \verb@grid_of_state@ avant de parcourir cette grille et l'afficher caractère par caractère.
+
+\section{Moves}
+
+Dans le fichier \verb@moves.ml@, on a implémenté les cinq fonctions demandées dans l'énoncé pour correspondre à la signature donnée ainsi que le type pour représenter un mouvement et une exception pour signaler l'impossibilité d'un mouvement.
+
+Le type \verb@move@ a été implémenté comme un enregistrement contenant la lettre représentant le bateau à bouger et un entier valant \verb@+1@ ou \verb@-1@ qui représente la direction du mouvement, vers l'avant ou l'arrière. Cela traduit fidèlement la représentation d'un mouvement par une chaine de deux caractères donnée dans l'énoncé et permet une implémentation immédiate des fonctions \verb@string_of_move@ et \verb@move_of_string@.
+
+Pour faciliter l'implémentation de la fonction \verb@apply_move@, quelques fonctions ont été rajoutées à \verb@port.ml@. Dans \verb@apply_move@, on récupère d'abord le bateau correspondant au mouvement, ce qui se fait à l'aide de la fonction \verb@get_boat@ dans \verb@Port@. Ensuite, on supprime ce bateau de l'état (à l'aide de la fonction \verb@remove_boat@), on le bouge (en utilisant la fonction \verb@move_boat@) et on le rajoute à nouveau. En cas d'une exception du type \verb@Invalid_argument@ lors de ce rajout, le mouvement tenté est impossible, et on lève ainsi une exception \verb@Cannot_move@.
+
+Pour tester la victoire, la fonction \verb@win@ cherche, à l'aide de \verb@get_boat@, le bateau \verb@A@ et teste si sa position de référence est la case $(4, 2)$. Avec cela, on implémente la fonction \verb@check_solution@. Elle commence d'abord par convertir la chaine de caractères passée en argument en une liste de mouvements à l'aide d'une fonction auxiliaire \verb@list_move_of_string@. Elle parcourt ensuite cette liste en appliquant les mouvements un après l'autre dans l'ordre. Si elle rencontre une exception du type \verb@Cannot_move@ lors d'un déplacement, elle renvoie \verb@false@. Sinon, à la fin de la liste de mouvements, on teste si l'état final est un état gagnant avec la fonction \verb@win@.
+
+\section{Solver}
+
+Le module \verb@Solver@ implémente les quatre fonctions nécessaires pour satisfaire la signature donnée dans l'énonce. La fonction \verb@all_possible_moves@ utilise une fonction auxiliaire\verb@all_moves@ qui construit d'abord une liste de tous les mouvements, possibles ou impossibles, en prenant tous les bateaux et rajoutant à la liste les déplacements de \verb@+1@ ou \verb@-1@. La fonction \verb@all_possible_moves@ ne fait que filtrer cette liste en supprimant tous les mouvements pour lesquels une application de \verb@apply_move@ lève l'exception \verb@Cannot_move@. Avec cette fonction, on implémente assez facilement \verb@all_reachable_states@ : il suffit d'utiliser un \verb@List.map@ pour appliquer à la liste de tous les mouvements possibles la fonction \verb@apply_move@.
+
+La partie principale du code, le solveur, est codé dans une fonction \verb@solve_state@ qui fait un parcours en largeur du graphe des états jusqu'à ce qu'un état gagnant soit trouvé (ou que tous les états aient été explorés sans trouver d'état gagnant). Pour l'implémentation classique du parcours en largeur, il faut garder en mémoire les états déjà visités pour éviter de repasser sur ces états et tomber sur une boucle infinie. Cela est fait à l'aide d'une table de hachage, utilisant le module \verb@Hashtbl@. Il se trouve que, en rajoutant dans cette table directement l'état (du type \verb@state@), deux états identiques peuvent être considérés comme distincts à cause de la méthode de hachage utilisée internement par \verb@Hashtbl@. En particulier, deux listes de bateaux contenant les mêmes bateaux dans un ordre différent représentent le même état, mais donnent des valeurs de hachage différents. Pour surmonter cette difficulté, on a transformé chaque état en une chaine de caractères de sorte que deux états sont égaux si et seulement si ces chaines sont égales. Cela est fait à l'aide de la fonction \verb@string_of_state@ implémentée dans \verb@Port@, qui ne fait que transformer la représentation de l'état par une grille de caractères obtenue avec \verb@grid_of_state@ en une seule chaine.
+
+On a aussi besoin, pour l'implémentation du solveur, d'une file contenant les prochains états à être examinés. Cette file a été implémentée à l'aide du module \verb@Queue@. On y rajoute à chaque étape un couple contenant l'état en soi et la chaine de caractères représentant la suite des mouvements permettant d'aller de l'état initial à cet état, ce qui permet de retrouver assez facilement à la fin la chaine représentant la solution. Le parcours en soi est fait dans une sous-fonction récursive qui boucle tant que la file n'est pas vide, levant une exception \verb@Not_found@ si la file est vide, ce qui indique que tous les états ont été explorés sans trouver une solution.
+
+Il s'agit d'un algorithme naïf qui ne fait pas d'heuristique cherchant à diminuer le nombre d'états à explorer. Sa complexité est en $O(n + m)$, où $n$ est le nombre d'états possibles et $m$ est le nombre d'arcs du graphe représentant les mouvements élémentaires entre deux états. On remarque qu'on a l'estimée grossière $n = O(5^b)$, où $b$ est la quantité de bateaux : chaque bateau peut être à au maximum $5$ positions différentes (avec moins de positions si sa taille est plus grande que 2). La quantité $5^b$ sur-estime le nombre d'états en ne prenant pas en compte le nombre de chevauchements. Comme dans tout graphe simple non-orienté, on a $m = O(n^2)$.
+
+Une possibilité pour améliorer le temps d'exécution serait d'utiliser un autre parcours, comme celui de l'algorithme $A\ast$. Cet algorithme permet de donner une priorité aux états à explorer à partir du nombre de mouvements depuis l'état initial et une heuristique donnant une borne par le bas du nombre de mouvements nécessaires pour arriver à la solution. La difficulté est de trouver une bonne heuristique adaptée à ce problème. Une heuristique possible est de considérer le nombre de cases séparant le bateau \verb@A@ de sa position-cible $(4, 2)$ en rajoutant une estimée du nombre de mouvements nécessaires pour dégager les bateaux entre \verb@A@ et sa position-cible (une estimée triviale étant d'au moins 1 mouvement par bateau).
+
+Finalement, la fonction \verb@solve_input@ lit une grille à partir d'un fichier d'entrée à l'aide de \verb@input_state@ et calcule sa solution par \verb@solve_state@.
+
+\appendix
+
+\section{Implémentation alternative}
+\label{Append}
+
+Les fichiers \verb@port_grille.ml@, \verb@moves_grille.ml@ et \verb@solver_grille.ml@ donnent une implémentation alternative utilisée dans un premier moment pour ce projet qui fait un choix d'implémentation différente pour \verb@state@. En effet, certaines fonctions sont plus simples à implémenter si le \verb@state@ est représenté par une grille de bateaux, ce qui est le cas évident de \verb@grid_of_state@, \verb@output_state@, \verb@boat_in_grid@, ainsi que pour tester si un état correspond à une victoire ou pour tester la présence d'un bateau dans une case donnée. Cependant, cette représentation, bien que assez naturelle, rend aussi d'autres problèmes plus compliqués, comme celui de bouger un bateau. Ainsi, le choix fait dans cette implémentation alternative a été de stocker à la fois cette grille et la liste des bateaux. Si l'implémentation de la plupart des fonctions est alors plus directe, pouvant utiliser la représentation plus adaptée, cela a l'inconvénient de contenir de l'information dupliquée et d'occuper une place plus importante en mémoire. De plus, les fonctions modifiant un état doivent s'occuper de modifier les deux représentations.
+
+Malgré ces inconvénients, l'implémentation donnée dans ces fichiers suit aussi les consignes de l'énoncé et permet de résoudre le jeu \emph{ORush}. Il est à noter que la compilation de ces fichiers n'est pas faite par le fichier \verb@Makefile@.
+
+\end{document}
