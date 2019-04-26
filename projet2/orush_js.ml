@@ -1,7 +1,13 @@
+(******************************************************************************)
+(* orush_js.ml                                                                *)
+(******************************************************************************)
+
 open Dom
 
+(* val set_grid : Dom.Canvas.RenderingContext2D.t -> unit *)
+(* Dessine les lignes en blanc d'un grid 6 x 6 dans le canvas dont le
+   RenderingContext2D est passé en argument. *)
 let set_grid ctx_grid =
-  (*set grid*)
   let _ = Canvas.RenderingContext2D.set_stroke_style ctx_grid "white" in
   let _ = Canvas.RenderingContext2D.beginPath ctx_grid in
   let rec loop i =
@@ -16,6 +22,9 @@ let set_grid ctx_grid =
   let _ = Canvas.RenderingContext2D.set_fill_style ctx_grid "black" in
   Canvas.RenderingContext2D.fill_rect ctx_grid 355 (60*2) 5 60
 
+(* val draw_boat : Port.boat -> Dom.Canvas.RenderingContext2D.t -> unit *)
+(* Prend en argument un bateau et un canvas et dessine ce bateau dans le
+   canvas. *)
 let draw_boat boat ctx_grid =
   let _ = Canvas.RenderingContext2D.set_fill_style ctx_grid Maps.colors.((int_of_char (Port.string_of_boat boat).[0]) - 65) in
   let taille = Port.taille_of_boat boat in
@@ -26,6 +35,9 @@ let draw_boat boat ctx_grid =
     else
       Canvas.RenderingContext2D.fill_rect ctx_grid (x*60 + 10) (y*60 + 10) 40 (taille*60 - 20)
 
+(* val draw_state : Port.boat list -> Dom.Canvas.RenderingContext2D.t -> unit *)
+(* Prend en argument un état et un canvas et dessine les bateaux de cet état
+   dans le canvas. *)
 let draw_state state ctx_grid =
   let rec loop st cpt =
     match st with
@@ -35,6 +47,8 @@ let draw_state state ctx_grid =
       loop tl (cpt + 1)
   in loop state 0
 
+(* val add_maps : Dom.Element.t -> unit *)
+(* Ajoute toutes les cartes du module Maps dans le menu. *)
 let add_maps btn_map =
   Array.iteri (
     fun i map ->
@@ -44,15 +58,27 @@ let add_maps btn_map =
       Element.append_child btn_map opt
   ) Maps.all_maps
 
+(* val clear_canvas : Dom.Canvas.RenderingContext2D.t -> unit *)
+(* Efface tous les éléments du canvas. *)
 let clear_canvas ctx_grid =
   Canvas.RenderingContext2D.clear_rect ctx_grid 0 0 360 360
 
+(* val boat_of_click : Dom.Event.t -> char ref -> Port.boat list ref -> unit *)
+(* Capture un click sur le canvas et modifie la variable boat_courant pour
+   qu'elle contienne le nom du bateau dans la zone clickée. *)
 let boat_of_click e boat_courant state_courant =
   let x = (Event.offset_x e)/60 in
   let y = (Event.offset_y e)/60 in
   let grid = Port.grid_of_state !state_courant in
   boat_courant := grid.(y).(x)
 
+(* val start :
+   Dom.Canvas.RenderingContext2D.t ->
+   Dom.Element.t ->
+   Dom.Element.t list ->
+   Dom.Element.t ->
+   int ref -> Port.boat list ref -> char ref -> int ref -> 'a list ref -> unit *)
+(* Demarre le jeu avec la carte sélectionnée. *)
 let start ctx_grid btn_step btn_list solution_txt carte_courant state_courant boat_courant cpt_moves solution =
   let _ = clear_canvas ctx_grid in
   let _ = set_grid ctx_grid in
@@ -70,6 +96,11 @@ let start ctx_grid btn_step btn_list solution_txt carte_courant state_courant bo
     let _ = (carte_courant := i) in
     Element.set_text_content solution_txt ""
 
+(* val move_of_click :
+   Dom.Canvas.RenderingContext2D.t ->
+   Port.boat list ref -> char ref -> int ref -> string -> unit *)
+(* Fait bouger un bateau à partir d'un click sur bouton de mouvement ou
+   une touche du clavier. *)
 let move_of_click ctx_grid state_courant boat_courant cpt_moves btn_name =
   if !boat_courant <> '~' then
     let move = Moves.move_of_string ((Char.escaped !boat_courant)^
@@ -91,6 +122,13 @@ let move_of_click ctx_grid state_courant boat_courant cpt_moves btn_name =
       with
       | _ -> ()
 
+(* val solve_start :
+   Port.boat list ref ->
+   Dom.Element.t ->
+   Dom.Element.t ->
+   Dom.Element.t list -> int ref -> Moves.move list ref -> unit *)
+(* Calcul de la solution d'une grille et mise à jour de la variable contenant
+   la solution. *)
 let solve_start state_courant text btn_step list_btn cpt_moves solution =
   if Moves.win !state_courant then
     Window.alert window ("Gagné en "^(string_of_int !cpt_moves)^" pas !")
@@ -101,7 +139,12 @@ let solve_start state_courant text btn_step list_btn cpt_moves solution =
     let _ = List.iter (fun btn -> Element.set_attribute btn "disabled" "true") list_btn in
     Element.set_text_content text solution_str
 
-
+(* val solve_step :
+   Dom.Canvas.RenderingContext2D.t ->
+   Port.boat list ref ->
+   Dom.Element.t ->
+   Dom.Element.t list -> int ref -> Moves.move list ref -> unit *)
+(* Fait un pas de la résolution dans la variable "solution". *)
 let solve_step ctx_grid state_courant btn_step list_btn cpt_moves solution =
   match !solution with
   |hd::tl ->
@@ -117,20 +160,10 @@ let solve_step ctx_grid state_courant btn_step list_btn cpt_moves solution =
       Window.alert window ("Gagné en "^(string_of_int !cpt_moves)^" pas !")
   |_ -> ()
 
-(*
-let solve ctx_grid state_courant text =
-  let solution_str = Solver.solve_state !state_courant in
-  let solution = Moves.list_move_of_string solution_str in
-  let _ = Element.set_text_content text solution_str in
-  List.iter (
-    fun move ->
-      state_courant := Moves.apply_move move !state_courant;
-      clear_canvas ctx_grid;
-      set_grid ctx_grid;
-      draw_state !state_courant ctx_grid;
-  ) solution *)
-
-let draw () =
+(* val main : unit -> unit *)
+(* Fonction principale. *)
+let main () =
+  (* Variables contenant l'état du jeu. *)
   let carte_courant = ref 0 in
   let state_courant = ref [] in
   let boat_courant = ref '~' in
@@ -227,7 +260,7 @@ let draw () =
         in
         if key_name <> "" then
           move_of_click ctx_grid state_courant boat_courant cpt_moves key_name; Element.set_text_content text ((string_of_int !cpt_moves)^" pas effectués")
-    ) false in 
+    ) false in
 
   let _ = Element.add_event_listener btn_start "click" (fun e -> start ctx_grid btn_step btn_list solution_txt carte_courant state_courant boat_courant cpt_moves solution; Element.set_text_content text ((string_of_int !cpt_moves)^" pas effectués")) false in
 
@@ -245,4 +278,4 @@ let draw () =
 
   Element.add_event_listener btn_solve "click" (fun e -> solve_start state_courant solution_txt btn_step btn_list cpt_moves solution) false
 
-let _ = draw ()
+let _ = main ()
